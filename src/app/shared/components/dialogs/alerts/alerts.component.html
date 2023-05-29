@@ -1,0 +1,24 @@
+<div class="overflow-hidden">
+  <div class="flex justify-center">
+    <img *ngIf="!data.found" src="./assets/icons/warning.svg" class="h-10">
+    <img *ngIf="data.found" src="./assets/icons/check-circle.svg" class="h-10">
+
+  </div>
+  <div *ngIf="data.message" class="text-center mt-2">
+    <p class="text-center">{{data.message}}</p>
+  </div>
+  <div *ngIf="data.codigoErro" class="text-start mt-2">
+    <p><b>Codigo do erro: </b> {{data.codigoErro}}</p>
+  </div>
+  <div *ngIf="data.messageErro" class="text-start mt-0.5">
+    <p><b>Mensagem de erro: </b> {{data.messageErro}}</p>
+  </div>
+  <div *ngIf="data.correcaoErro" class="text-start mt-0.5">
+    <p><b>Solução: </b> {{data.correcaoErro}}</p>
+  </div>
+  <div class="w-full flex justify-center mt-2">
+
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Continuar</button>
+
+  </div>
+</div>

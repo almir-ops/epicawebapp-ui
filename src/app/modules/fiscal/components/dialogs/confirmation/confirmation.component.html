@@ -1,0 +1,16 @@
+<div class="w-[350px]">
+  <div class="flex justify-center h-9">
+    <h2 mat-dialog-title class="text-center">Pedido salvo com sucesso</h2>
+    <div>
+      <img class="h-8 mx-2" src="./assets/icons/check-circle.svg">
+    </div>
+  </div>
+
+  <mat-dialog-content class="mat-typography">
+    <p class="text-center">Deseja salvar mais um pedido ou emitir a nota?</p>
+  </mat-dialog-content>
+  <mat-dialog-actions class="flex justify-between">
+    <button mat-button mat-dialog-close cdkFocusInitial>Salvar outro pedido</button>
+    <button mat-button [mat-dialog-close]="true" >Tabela de emissão</button>
+  </mat-dialog-actions>
+</div>

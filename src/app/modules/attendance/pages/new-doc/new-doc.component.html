@@ -1,0 +1,287 @@
+<div class="bg-gray-100">
+  <div class="flex w-full justify-center flex-col sm:flex-row sm:justify-between">
+    <div class="flex flex-col justify-start sm:mt-2 mt-0 ">
+      <h1
+        class="transition-transform duration-700 ease-in-out origin-left text-gray-900 text-xl sm:mx-7 mx-4 mt-3"
+      >
+        Novo cadastro
+      </h1>
+      <h3
+      class="transition-transform duration-700 ease-in-out origin-left text-gray-800 text-[12px] sm:text-md sm:mx-7 mx-4 "
+      >
+        Preencha os campos corretamente e cadastre um novo documento(s)
+      </h3>
+    </div>
+    <div class="flex flex-row justify-end mt-0 sm:mt-6 sm:mr-0 mx-4">
+      <button
+        type="button"
+        (click)="save()"
+        class="sm:w-32 w-full px-auto mr-4 py-1 sm:py-2 mt-3 sm:h-8 h-6 bg-green-800 text-white font-medium text-[10px] md:text-[11px] leading-snug uppercase rounded shadow-md hover:bg-green-900 hover:shadow-lg focus:bg-green-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out"
+      >
+        Salvar
+      </button>
+      <button
+        type="button"
+        (click)="back('atendimento/list')"
+        class="sm:w-32 w-full px-auto py-1 sm:py-2 mt-3 sm:mt-3 sm:mr-7 sm:h-8 h-6 bg-gray-500 text-white font-medium text-[10px] md:text-[11px] leading-snug uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out"
+      >
+        Voltar
+      </button>
+    </div>
+  </div>
+
+  <form [formGroup]="formNewDoc" class="mt-2">
+      <div class="flex flex-col mx-4 sm:mx-7 shadow-md">
+        <div class="border-b bg-gray-200 rounded-t-md">
+          <h2
+            class="transition-transform duration-700 ease-in-out origin-left text-gray-700 text-sm ml-4 py-1 mt-1"
+          >
+            Cliente:
+          </h2>
+        </div>
+        <div class="flex justify-start w-full bg-white">
+          <div class="flex flex-col lg:flex-row w-full my-1.5">
+            <div class="flex xl:flex-none w-[60%]">
+              <div class="mb-3 w-[50%] mx-1 ml-5 mt-2">
+                <label
+                  for="exampleText0"
+                  class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                  >Proposta</label
+                >
+                <input
+                  type="text"
+                  class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline outline-gray-600"
+                  formControlName="proposta"
+                  mask="00000000"
+                  placeholder="Digite a proposta"
+                />
+              </div>
+              <div class="mb-3 w-[120%] mx-1.5 ml-2 mt-2">
+                <label
+                  class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                  >Nome</label
+                >
+                <input
+                  type="text"
+                  class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                  formControlName="nome"
+                  placeholder="Digite o nome"
+                />
+              </div>
+              <div class="mb-3 w-[20%] mx-3 ml-2 mt-2">
+                <label
+                  class="inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                  >Falecimento</label
+                >
+                <input
+                  type="date"
+                  class="block w-full h-[25px] px-1.5 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                  formControlName="falecimento"
+                  placeholder="Data falecimento"
+                />
+              </div>
+            </div>
+
+            <div class="flex xl:flex-none xl:w-[20%]">
+              <div class="mb-3 w-[40%] ml-5 lg:ml-0 mt-2">
+                <label
+                  class="inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                  >CPF</label
+                >
+                <input
+                  class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                  formControlName="cpf"
+                  mask="000.000.000-00"
+                  placeholder="Digite o CPF"
+                />
+              </div>
+              <div class="mb-3 w-[60%] mx-3 ml-3 mt-2">
+                <label
+                  class="inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                  formControlName="email"
+                  placeholder="Digite o email"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mx-4 sm:mx-7 shadow-md -mt-3">
+        <div class="border-b bg-gray-200">
+          <h2
+            class="transition-transform duration-700 text-sm ease-in-out origin-left text-gray-700 text-md ml-4 mt-3 pt-2 py-1"
+          >
+            Localização:
+          </h2>
+        </div>
+        <div class="flex justify-start w-full bg-white">
+          <div class="flex flex-row sm:w-[40%] my-2">
+            <div class="mb-3 w-[20%] mx-4 ml-5 mt-1">
+              <label
+                class="inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Quadra</label
+              >
+              <input
+                type="text"
+                class="block w-full h-[25px] px-3 py-0.5 font-normal text-[11px] sm:text-[13px] text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="quadra"
+                placeholder="Digite a quadra"
+                (keyup)="upperTextQuadra()"
+              />
+            </div>
+            <div class="mb-3 w-[20%] mx-2 ml-3 mt-1">
+              <label
+                class="inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Setor</label
+              >
+              <input
+                type="text"
+                class="block w-full h-[25px] px-3 py-0.5 font-normal text-[11px] sm:text-[13px] text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="setor"
+                placeholder="Digite o setor"
+              />
+            </div>
+            <div class="mb-3 w-[30%] mx-2 ml-5 mt-1">
+              <label
+                class="inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Lote</label
+              >
+              <input
+                type="text"
+                class="block w-full h-[25px] px-3 py-0.5 font-normal text-[11px] sm:text-[13px] text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="lote"
+                placeholder="Digite o lote"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col -mt-2 mx-4 sm:mx-7 shadow-md">
+        <div class="border-b bg-gray-200">
+          <h2
+            class="transition-transform duration-700 ease-in-out origin-left text-gray-700 text-sm ml-4 mt-1 py-1"
+          >
+            Upload de arquivos:
+          </h2>
+        </div>
+        <div class="flex justify-start w-full bg-white">
+          <div class="flex flex-row w-full mt-1 mb-3">
+            <div class="mb-3 w-[38%] ml-5 mr-5 mt-2">
+              <label
+                class="form-label inline-block mb-2 text-gray-700 text-[12px] sm:text-[13px]"
+                >Selecione os arquivos para upload</label
+              >
+              <input
+                class="form-control block w-full lg:w-[350px] h-[25px] px-3 py-0.5 text-[12px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 active:outline-none focus:outline-none rounded transition ease-in-out m-0 mr-2"
+                (change)="onFileInput($event)"
+                multiple
+                #myInputFiles
+                type="file"
+                id="formFile"
+                mat-raised-button
+                #tooltip="matTooltip"
+                matTooltip="Selecione TODOS os arquivos que deseja fazer upload"
+                matTooltipPosition="after"
+                matTooltipClass="custom-tooltip"
+              />
+            </div>
+            <div class=" w-[62%] mx-3 mt-3">
+              <div class="flex flex-col mt-3 sm:mt-0">
+                <label class="text-gray-700 text-xs sm:text-sm">
+                  Selecione o Scanner:
+                </label>
+                <mat-radio-group class="mt-2" [(ngModel)]="selectedScanner" formControlName="scanner">
+                  <mat-radio-button class="text-gray-700 text-xs sm:text-sm mr-2" [value]="scanners[0]">Scanner 1</mat-radio-button>
+                  <mat-radio-button class="text-gray-700 text-xs sm:text-smml-4" [value]="scanners[1]">Scanner 2</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </form>
+  <div class="-mt-1.5 pb-12">
+    <div class="mx-auto px-4 sm:px-7">
+      <div class="bg-white overflow-hidden shadow-md sm:rounded-b-lg">
+        <div class="flex flex-col">
+          <div class="overflow-x-auto">
+            <div class="w-full">
+              <div class="block max-h-[350px]">
+                <table class="w-full">
+                  <thead class="bg-gray-200 border-b sticky top-0">
+                    <tr>
+                      <th
+                        scope="col"
+                        class="text-sm font-normal text-gray-700 px-3 py-2"
+                      >
+                        Imagem
+                      </th>
+                      <th
+                        scope="col"
+                        class="text-sm font-normal text-gray-700  py-2"
+                      >
+                        Nome do arquivo
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody class="max-h-[500px] overflow-y-auto" >
+                    <tr
+                      class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
+                      *ngFor="let item of listImageFile ;index as i"
+                    >
+                      <td
+                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                      >
+                        <img
+                          [src]="item.url"
+                          class="h-12 w-10 mx-auto cursor-pointer"
+                          (click)="openDialog(item.url, listImageFile, i)"
+                          role="img"
+                        />
+                      </td>
+                      <td
+                        class="text-sm font-medium text-gray-900 px-6 py-4 whitespace-nowrap text-center"
+                      >
+                        {{ item.nameFile }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="bg-white w-full h-[52px]" *ngIf="listImageFile.length < 1">
+                  <div class="flex justify-center mt-4">
+                    <div class="flex flex-col">
+                      <img class="h-5 w-5 mx-auto" src="./assets/icons/warning.svg">
+                      <div class="text-gray-500 text-sm mt-1 text-[12px] sm:text-sm">
+                        Nenhuma imagem selecionada
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="listDocSaves.length > 0">
+
+    <app-contador
+      [title]="titleContador"
+      [message]="messageContador"
+      [expandContador]="closeContador"
+      [listDocSaves]="listDocSaves"
+      ></app-contador>
+
+  </div>
+  <div *ngIf="loading">
+    <app-loading></app-loading>
+  </div>
+</div>

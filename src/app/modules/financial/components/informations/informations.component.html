@@ -1,0 +1,19 @@
+<div class="h-[32px] {{width}} mx-1 bg-white shadow-md rounded-full duration-100 cursor-pointer"
+  (click)="expand()"
+  >
+  <div *ngIf="!expanded" class="">
+    <img src="./assets/icons/exclamation-circle-gray.svg"
+      matTooltip="Informações "
+      matTooltipPosition="right"
+      class="h-[30px] w-[30px] mx-auto my-auto">
+  </div>
+  <div *ngIf="expanded">
+    <div class="grid grid-cols-1 content-center">
+    <div class="flex flex-row text-xs my-2 {{width}} justify-center duration-200">
+        <div class="text-gray-600">Encontrados: {{listFoundContrats.length}}</div>
+        <div class="text-green-500 ml-2">Enviados: {{listSendContrats.length}}</div>
+        <div class="text-red-500 ml-2">Erros: {{listErrorContrats.length}}</div>
+      </div>
+    </div>
+  </div>
+</div>

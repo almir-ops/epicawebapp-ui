@@ -1,0 +1,27 @@
+<!-- carousel -->
+<div class="carousel h-[400px] sm:h-[500px] w-[220px] sm:w-[400px]">
+  <!-- controls -->
+  <div class="absolute flex justify-between w-full h-full items-center">
+    <div class="z-10">
+      <button class="outline-none bg-slate-500 hover:bg-slate-600 rounded-full opacity-60 h-9 w-9 " (click)="onPreviousClick()">
+        <img src="./assets/icons/arrow-left.svg" class="h-7 mx-auto ">
+      </button>
+    </div>
+    <div class="z-10">
+      <button class="outline-none bg-slate-500 hover:bg-slate-600 rounded-full opacity-60 h-9 w-9" (click)="onNextClick()">
+        <img src="./assets/icons/arrow-right.svg" class="h-7 mx-auto">
+      </button>
+    </div>
+  </div>
+  <ng-container *ngFor="let slide of slides; let i = index">
+    <div class="w-full absolute z-0">
+      <img
+        *ngIf="i === currentSlide"
+        [src]="selectItem(slide)"
+        class="slide h-[400px] sm:h-[500px] mx-auto object-contain"
+        [@slideAnimation]="animationType"
+      />
+    </div>
+  </ng-container>
+
+</div>

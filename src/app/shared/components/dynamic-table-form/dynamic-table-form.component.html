@@ -1,0 +1,56 @@
+
+   <!--Table de permissoes-->
+   <div class="flex flex-col md:max-h-[450px]" [formGroup]="form">
+    <div class="overflow-x-auto mx-6">
+      <table class=" text-center max-h-[400px] w-full">
+        <thead class="border-b bg-gray-500">
+          <tr>
+            <th scope="col" class="text-sm font-medium text-white px-3 py-4">
+              Módulo
+            </th>
+            <th scope="col" class="text-sm font-medium text-white py-4">
+              Visualizar
+            </th>
+            <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+              Incluir
+            </th>
+            <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+              Editar
+            </th>
+            <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+              Excluir
+            </th>
+            <!-- <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+              Ação
+            </th> -->
+          </tr>
+        </thead>
+
+        <tbody *ngFor="let item of listPermissions" >
+            <tr class="bg-white border-b" >
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                {{item[0].nome}}
+              </td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" *ngFor="let item of actions index as i" formArrayName="attendence">
+                  <input
+                  type="checkbox"
+                  [formControlName]="i"
+                  />
+                </td>
+
+
+            <!--  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                <div class="cursor-pointer">
+                  <div class="cursor-pointer flex flex-row justify-center">
+                    <img class="w-5 h-5 mx-2 mt-[3px]"  src="/assets/icons/eye.svg">
+                    <img class="w-5 h-5 mx-2 mt-[3px]"  src="/assets/icons/pencil.svg">
+                  </div>
+                </div>
+              </td -->
+            </tr>
+        </tbody>
+
+      </table>
+  </div>
+  </div>
+  <!--Fim da Table de permissoes-->

@@ -1,0 +1,260 @@
+<div class="bg-gray-100">
+   <div class="flex w-full justify-center flex-col sm:flex-row sm:justify-between">
+    <div class="flex flex-col justify-start sm:mt-2 mt-0 ">
+      <h1
+        class="transition-transform duration-700 ease-in-out origin-left text-gray-900 text-xl sm:mx-7 mx-4 mt-3"
+      >
+        Excluir cadastro
+      </h1>
+      <h3
+      class="transition-transform duration-700 ease-in-out origin-left text-gray-800 text-[12px] sm:text-md sm:mx-7 mx-4 "
+      >
+        Delete o registro completamente
+      </h3>
+    </div>
+    <div class="flex flex-row justify-end mt-0 sm:mt-6 sm:mr-0 mx-4">
+      <button
+        type="button"
+        (click)="openDialogDelete(currentDoc)"
+        class="sm:w-32 w-full px-auto mr-4 py-1 sm:py-2 mt-3 sm:h-8 h-6 bg-[#800200] text-white font-medium text-[10px] md:text-[11px] leading-snug uppercase rounded shadow-md hover:bg-[#700200] hover:shadow-lg focus:bg-[#700200] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-[#700200] active:shadow-lg transition duration-150 ease-in-out"
+      >
+        Excluir
+      </button>
+      <button
+        type="button"
+        (click)="navegate('atendimento/list')"
+        class="sm:w-32 w-full px-auto py-1 sm:py-2 mt-3 sm:mt-3 sm:mr-7 sm:h-8 h-6 bg-gray-500 text-white font-medium text-[10px] md:text-[11px] leading-snug uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out"
+      >
+        Voltar
+      </button>
+    </div>
+  </div>
+
+  <form [formGroup]="formDeleteDoc" class="mt-2">
+    <div class="flex flex-col mx-4 sm:mx-7 shadow-md">
+      <div class="border-b bg-gray-200 rounded-t-md">
+        <h2
+          class="transition-transform duration-700 ease-in-out origin-left text-gray-700 text-sm ml-4 py-1 mt-1"
+        >
+          Cliente:
+        </h2>
+      </div>
+      <div class="flex justify-start w-full bg-white">
+        <div class="flex flex-col lg:flex-row w-full my-3">
+          <div class="flex xl:flex-none">
+            <div class="mb-3 w-[70%] mx-1 ml-5 mt-2">
+              <label
+                for="exampleText0"
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+                >Proposta</label
+              >
+              <input
+                type="number"
+                class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline outline-gray-600"
+                formControlName="proposta"
+                placeholder="Digite a proposta"
+              />
+            </div>
+            <div class="mb-3 w-[90%] mx-1.5 ml-2 mt-2">
+              <label
+                for="exampleText0"
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+                >Nome</label
+              >
+              <input
+                type="text"
+                class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline outline-gray-600"
+                formControlName="nome"
+                placeholder="Digite o nome"
+              />
+            </div>
+            <div class="mb-3 w-[40%] mx-3 ml-2 mt-2">
+              <label
+                for="exampleText0"
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+                >Falecimento</label
+              >
+              <input
+                type="date"
+                class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline outline-gray-600"
+                formControlName="falecimento"
+                placeholder="Data falecimento"
+              />
+            </div>
+          </div>
+
+          <div class="flex xl:flex-none">
+            <div class="mb-3 w-[60%] ml-5 lg:ml-0 mt-2">
+              <label
+                for="exampleText0"
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+                >CPF</label
+              >
+              <input
+                type="number"
+                class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline outline-gray-600"
+                formControlName="cpf"
+              />
+            </div>
+            <div class="mb-3 w-[60%] mx-3 ml-3 mt-2">
+              <label
+                for="exampleText0"
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+                >Email</label
+              >
+              <input
+                type="email"
+                class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline outline-gray-600"
+                formControlName="email"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mx-4 sm:mx-7 shadow-md -mt-3">
+      <div class="border-b bg-gray-200">
+        <h2
+          class="transition-transform duration-700 text-sm ease-in-out origin-left text-gray-700 text-md ml-4 mt-3 pt-2 py-1"
+        >
+          Localização:
+        </h2>
+      </div>
+      <div class="flex justify-start w-full bg-white">
+        <div class="flex flex-row sm:w-[40%] my-3">
+          <div class="mb-3 w-[20%] mx-4 ml-5 mt-2">
+            <label
+              for="exampleText0"
+              class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+              >Quadra</label
+            >
+            <input
+              type="text"
+              class="form-control block w-full h-[25px] px-3 py-0.5 font-normal text-[11px] sm:text-sm text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              formControlName="quadra"
+              placeholder="Não possui"
+            />
+          </div>
+          <div class="mb-3 w-[20%] mx-2 ml-5 mt-2">
+            <label
+              for="exampleText0"
+              class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+              >Setor</label
+            >
+            <input
+              type="text"
+              class="form-control block w-full h-[25px] px-3 py-0.5 font-normal text-[11px] sm:text-sm text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              formControlName="setor"
+              placeholder="Não possui"
+            />
+          </div>
+          <div class="mb-3 w-[30%] mx-2 ml-5 mt-2">
+            <label
+              for="exampleText0"
+              class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+              >Lote</label
+            >
+            <input
+              type="text"
+              class="form-control block w-full h-[25px] px-3 py-0.5 font-normal text-[11px] sm:text-sm text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              formControlName="lote"
+              placeholder="Não possui"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="-mt-1.5 pb-12">
+    <div class="mx-auto px-2 sm:px-7">
+      <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+        <div class="flex flex-col">
+          <div class="overflow-x-auto">
+            <div class="w-full">
+              <div class="block max-h-[500px]">
+                <table class="w-full">
+                  <thead class="bg-gray-200 border-b sticky top-0">
+                    <tr>
+                      <th
+                        scope="col"
+                        class="text-sm font-medium text-gray-700 px-3 py-2"
+                      >
+                        Imagem
+                      </th>
+                      <th
+                        scope="col"
+                        class="text-sm font-medium text-gray-700 py-2"
+                      >
+                        Nome do arquivo
+                      </th>
+                      <th
+                        scope="col"
+                        class="text-sm font-medium text-gray-700 px-6 py-2"
+                      >
+                        Caminho local
+                      </th>
+                      <th
+                      scope="col"
+                      class="text-sm font-medium text-gray-700 px-6 py-2"
+                    >
+                      Ação
+                    </th>
+                    </tr>
+                  </thead>
+
+                  <tbody class="max-h-[500px] overflow-y-auto">
+                    <tr
+                      class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
+                      *ngFor="let item of imagesCurrentDoc"
+                    >
+                      <td
+                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                      >
+                        <img
+                          [src]="replaceUrl(item.path_sys)"
+                          class="h-12 w-10 mx-auto cursor-pointer"
+                          (click)="
+                            openDialog(
+                              replaceUrl(item.path_sys),
+                              imagesCurrentDoc
+                            )
+                          "
+                          role="img"
+                        />
+                      </td>
+                      <td
+                        class="text-sm font-normal text-gray-900 px-6 py-4 whitespace-nowrap text-center"
+                      >
+                        {{ item.arquivo_destino }}
+                      </td>
+                      <td
+                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center"
+                      >
+                        {{ item.path_sys }}
+                      </td>
+                      <td >
+                        <div class="cursor-pointer">
+                          <div
+                            class="cursor-pointer flex justify-center sm:justify-start "
+                          >
+                            <img
+                              class="w-7 h-7 px-1 mt-[3px] mx-auto hover:scale-125 duration-300"
+                              (click)="openDialogDeleteArquivo(item)"
+                              src="/assets/icons/lixeira.svg"
+                              title="Excluir"
+                            />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

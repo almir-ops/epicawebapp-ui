@@ -1,0 +1,683 @@
+<div class="mb-10">
+  <div class="flex justify-between">
+    <div>
+      <h1
+        class="transition-transform duration-700 ease-in-out origin-left text-gray-900 text-xl ml-4 mt-3"
+      >
+        Dados do pagamento
+      </h1>
+      <h3
+      class="transition-transform duration-700 ease-in-out origin-left text-gray-800 text-xs ml-4"
+      >
+        Preencha os dados e verifique para emitir a nota fiscal
+      </h3>
+    </div>
+  </div>
+  <form [formGroup]="formNotaFiscal" (ngSubmit)="saveNfeRequest()">
+    <div class="flex flex-col mx-4 sm:mx-4 mt-2 shadow-md">
+      <div class="border-b bg-gray-200 rounded-t-md">
+        <h2
+          class="transition-transform duration-700 ease-in-out origin-left text-gray-700 text-sm ml-4 py-1 mt-1"
+        >
+          Pesquisa do cliente:
+        </h2>
+      </div>
+
+      <div class="flex justify-start w-full bg-white">
+        <div class="flex flex-col sm:flex-row w-full my-1 mx-2">
+
+          <div class="flex sm:flex-none w-[100%] sm:w-[45%]">
+           <!--Tipo de cliente-->
+            <div class="mb-3 w-[40%] mx-1.5 ml-2 mt-2">
+              <label
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Tipo</label>
+              <select class="form-select appearance-none
+                block
+                w-full
+                h-[25px]
+                px-2
+                text-[11px]
+                sm:text-[13px]
+                text-base
+                font-normal
+                text-gray-700
+                bg-white bg-clip-padding bg-no-repeat
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="tipo"
+                placeholder="Selecione"
+                >
+                <option selected value="F">Pessoa Fisica</option>
+                <option value="J">Pessoa Juridica</option>
+            </select>
+            </div>
+
+            <div *ngIf="form['tipo'].value === 'F'" class="flex xl:flex-none w-[60%]">
+              <div class="mb-3 w-[100%] ml-2 mt-2">
+                <label
+                  class="inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                  >CPF</label
+                >
+                <input
+                  class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                  formControlName="cpfCnpj"
+                  mask="000.000.000-00"
+                  (ngModelChange)="searchClient()"
+                  placeholder="Digite o CPF"
+                  [ngClass]="{ 'is-invalid': submitted && !form['cpfCnpj'].value || !validaCPF(form['cpfCnpj'].value)}"
+                />
+                <div *ngIf="submitted && form['cpfCnpj'].errors || !validaCPF(form['cpfCnpj'].value)" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+                  <div *ngIf="form['cpfCnpj'].errors && form['cpfCnpj'].value === ''">Este campo é obrigatório</div>
+                  <div *ngIf="!validaCPF(form['cpfCnpj'].value)">Digite um CPF valido</div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="form['tipo'].value === 'J'" class="flex xl:flex-none w-[60%]">
+              <div class="mb-3 w-[100%] ml-2 mt-2">
+                <label
+                  class="inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                  >CNPJ</label
+                >
+                <input
+                  class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                  formControlName="cpfCnpj"
+                  mask="00.000.000/0000-00"
+                  (ngModelChange)="searchClient()"
+                  placeholder="Digite o CNPJ"
+                  [ngClass]="{ 'is-invalid': submitted && !form['cpfCnpj'].value || !validaCNPJ(form['cpfCnpj'].value)}"
+                />
+                <div *ngIf="submitted && form['cpfCnpj'].errors || !validaCNPJ(form['cpfCnpj'].value)" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+                  <div *ngIf="form['cpfCnpj'].errors && form['cpfCnpj'].value === ''">Este campo é obrigatório</div>
+                  <div *ngIf="!validaCNPJ(form['cpfCnpj'].value) || form['cpfCnpj'].errors">Digite um CNPJ valido</div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="w-[100%] sm:w-[60%] flex flex-col sm:flex-row pl-2 sm:pl-0">
+            <button
+            type="button"
+            (click)="searchClient()"
+            class="sm:w-32 w-full px-auto py-[5px] sm:mt-[35px] mb-3 sm:mb-0 sm:ml-4 sm:h-6 h-6 bg-gray-400 text-white font-medium text-[10px] md:text-[11px] leading-snug uppercase rounded shadow-md hover:bg-gray-400 hover:shadow-lg focus:bg-gray-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+            >
+            Pesquisar
+            </button>
+            <div *ngIf="foundClient" class="text-[12px] text-[#27AE60] sm:mt-[38px] -mt-2 sm:ml-2 flex flex-row w-[200px]">
+              <img class="h-5 w-5" src="./assets/icons/check-circle.svg">
+              <span class="ml-1 mt-[1px]">Cliente encontrado</span>
+            </div>
+            <div *ngIf="foundClient === false" class="text-[12px] text-[#cc9900] sm:mt-[38px] -mt-2 sm:ml-2 flex flex-row w-[300px]">
+              <img class="h-5 w-5" src="./assets/icons/exclamation-circle.svg">
+              <span class="ml-1 mt-[1px]">Nenhum cliente encontrado</span>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+    <div class="flex flex-col mx-4 sm:mx-4 shadow-md">
+      <div class="border-b bg-gray-200 rounded-t-md">
+        <h2
+          class="transition-transform duration-700 ease-in-out origin-left text-gray-700 text-sm ml-4 py-1 mt-1"
+        >
+          Dados do cliente:
+        </h2>
+      </div>
+
+      <div class="flex justify-start w-full bg-white">
+        <div class="flex flex-col lg:flex-row w-full my-1 mx-2">
+
+          <div class="flex xl:flex-none w-[100%] lg:w-[60%]">
+           <!--Nome Tomador-->
+            <div class="mb-3 w-[120%] mx-1.5 ml-2 mt-2">
+              <label
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Tomador</label
+              >
+              <input
+                #tomador
+                type="text"
+                class="form-control block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="tomador"
+                placeholder="Digite o nome"
+                [ngClass]="{ 'is-invalid': submitted && form['tomador'].errors }"
+                (keyup)="upperText('tomador')"
+
+              />
+              <div *ngIf="submitted && form['tomador'].errors" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+                <div *ngIf="form['tomador'].errors">Este campo é obrigatório</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex xl:flex-none lg:w-[40%]">
+            <!--
+              <div class="mb-3 w-[40%] ml-2 mt-2">
+                <label
+                  class="inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                  >CPF/CNPJ</label
+                >
+                <input
+                  class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                  formControlName="cpf"
+                  mask="000.000.000-00||00.000.000/0000-00"
+                  placeholder="Digite o CPF ou CNPJ"
+                  [ngClass]="{ 'is-invalid': submitted && form['cpf'].errors }"
+                />
+                <div *ngIf="submitted && form['cpf'].errors" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+                  <div *ngIf="form['cpf'].errors">Este campo é obrigatório</div>
+                </div>
+              </div>
+
+            -->
+            <div class="mb-3 w-[100%] mx-2 ml-2 sm:ml-3 mt-2">
+              <label
+                class="inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Email</label
+              >
+              <input
+                type="email"
+                class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="email"
+                placeholder="Digite o email"
+                (ngModelChange)="validateEmail(form['email'].value)"
+                [ngClass]="{ 'is-invalid': form['email'].value && submitted && !isValidEmail}"
+              />
+              <div *ngIf="form['email'].value && submitted && !isValidEmail" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+                <div>Informe um email valido</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="flex justify-start w-full bg-white">
+        <div class="flex flex-col lg:flex-row w-full my-1 mx-2">
+
+          <div class="flex xl:flex-none w-[100%] lg:w-[50%]">
+           <!--CEP Tomador-->
+            <div class="mb-3 w-[40%] mx-1.5 ml-2 mt-2">
+              <label
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >CEP</label
+              >
+              <input
+                type="text"
+                class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="cep"
+                placeholder="Digite o CEP"
+                mask="00000-000"
+                (ngModelChange)="getLogradouro(formNotaFiscal.controls['cep'].value)"
+                [ngClass]="{ 'is-invalid': submitted && form['cep'].errors }"
+              />
+              <div *ngIf="submitted && form['cep'].errors" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+                <div *ngIf="form['cep'].errors">Este campo é obrigatório</div>
+              </div>
+            </div>
+            <div class="mb-3 w-[60%] mx-1.5 ml-2 mt-2">
+              <label
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Estado</label>
+              <select class="form-select appearance-none
+                block
+                w-full
+                h-[25px]
+                px-2
+                text-[11px]
+                sm:text-[13px]
+                text-base
+                font-normal
+                text-gray-700
+                bg-white bg-clip-padding bg-no-repeat
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="estado"
+                placeholder="Selecione"
+                (click)="getCidades()"
+                [ngClass]="{ 'is-invalid': submitted && form['estado'].errors }"
+                >
+                <option value="" disabled selected>
+                  Selecione uma opção</option>
+                <option
+                *ngFor="let item of listEstados" value="{{item.sigla}}"
+                >{{item.nome}}</option>
+            </select>
+            <div *ngIf="submitted && form['estado'].errors" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+              <div *ngIf="form['estado'].errors">Este campo é obrigatório</div>
+            </div>
+            </div>
+            <div class="mb-3 w-[60%] mx-1.5 ml-2 mt-2">
+              <label
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Cidade</label>
+              <select class="form-select appearance-none
+                block
+                w-full
+                h-[25px]
+                px-2
+                text-[11px]
+                sm:text-[13px]
+                text-base
+                font-normal
+                text-gray-700
+                bg-white bg-clip-padding bg-no-repeat
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="cidade"
+                [ngClass]="{ 'is-invalid': submitted && form['cidade'].errors }"
+                >
+                  <option value="" disabled selected>
+                    Selecione uma opção</option>
+                <option
+                *ngFor="let item of listCidades; let i = index" value="{{item}}"
+                >{{item}}</option>
+            </select>
+            <div *ngIf="submitted && form['cidade'].errors" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+              <div *ngIf="form['cidade'].errors">Este campo é obrigatório</div>
+            </div>
+            </div>
+          </div>
+
+          <div class="flex xl:flex-none lg:w-[50%]">
+            <div class="mb-3 w-[50%] ml-2 mt-2">
+              <label
+                class="inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Logradouro</label
+              >
+              <input
+                class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="logradouro"
+                placeholder="Digite o logradouro"
+                [ngClass]="{ 'is-invalid': submitted && form['logradouro'].errors }"
+              />
+              <div *ngIf="submitted && form['logradouro'].errors" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+                <div *ngIf="form['logradouro'].errors">Este campo é obrigatório</div>
+              </div>
+            </div>
+            <div class="mb-3 w-[60%] mx-2 ml-3 mt-2">
+              <label
+                class="inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Numero</label
+              >
+              <input
+                #numero
+                type="email"
+                class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="numero"
+                placeholder="Digite o numero"
+                [ngClass]="{ 'is-invalid': submitted && form['numero'].errors }"
+              />
+              <div *ngIf="submitted && form['numero'].errors" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+                <div *ngIf="form['numero'].errors">Este campo é obrigatório</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="flex justify-start w-full bg-white">
+        <div class="flex flex-col lg:flex-row w-full my-1 mx-2">
+          <div class="flex xl:flex-none w-[100%] lg:w-[30%]">
+            <div class="mb-3 w-[100%] mx-1.5 ml-2 mt-2">
+              <label
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Bairro</label
+              >
+              <input
+                type="text"
+                class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="bairro"
+                placeholder="Digite o bairro"
+                [ngClass]="{ 'is-invalid': submitted && form['bairro'].errors }"
+              />
+              <div *ngIf="submitted && form['bairro'].errors" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+                <div *ngIf="form['bairro'].errors">Este campo é obrigatório</div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="flex xl:flex-none lg:w-[70%]">
+            <div class="mb-3 w-[60%] ml-2 mt-2">
+              <label
+                class="inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Complemento</label
+              >
+              <input
+                class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="complemento"
+                placeholder="Digite o complemento"
+              />
+            </div>
+            <div class="mb-3 w-[60%] mx-2 ml-3 mt-2">
+              <label
+                class="inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Telefone</label
+              >
+              <input
+                class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="telefone"
+                placeholder="Digite o numero com DDD"
+                mask="(00) 0000-0000"
+                [ngClass]="{ 'is-invalid': submitted && form['telefone'].errors }"
+              />
+              <div *ngIf="submitted && form['telefone'].errors" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+                <div *ngIf="form['telefone'].errors">Este campo é obrigatório</div>
+              </div>
+            </div>
+            <div class="mb-3 w-[60%] mx-2 ml-3 mt-2">
+              <label
+                class="inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Celular</label
+              >
+              <input
+                class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="celular"
+                placeholder="Digite o numero com DDD"
+                mask="(00) 0000-0000||(00) 00000-0000"
+                matTooltip="Digite o numero de celular com DDD"
+                matTooltipPosition="below"
+                [ngClass]="{ 'is-invalid': submitted && form['celular'].errors }"
+              />
+              <div *ngIf="submitted && form['celular'].errors" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+                <div *ngIf="form['celular'].errors">Este campo é obrigatório</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <div class="mx-4 shadow-md -mt-3">
+      <div class="border-b bg-gray-200">
+        <h2
+          class="transition-transform duration-700 text-sm ease-in-out origin-left text-gray-700 text-md ml-4 mt-3 pt-2 py-1"
+        >
+          Dados do serviço:
+        </h2>
+      </div>
+      <div class="flex w-full bg-white">
+        <div class="flex flex-col sm:flex-row w-[100%] mt-3 mb-2">
+          <div class="flex flex-row sm:flex-none w-[100%] sm:w-[60%]">
+            <div class="mb-3 w-[20%] mx-4 ml-5 mt-[7px]">
+              <label
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+                >Data</label
+              >
+              <input
+                type="date"
+                class="form-control block w-full h-[25px] px-3 py-0.5 font-normal text-[11px] sm:text-sm text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                placeholder="Não possui"
+                formControlName="dataServico"
+                [ngClass]="{ 'is-invalid': submitted && form['dataServico'].errors }"
+              />
+              <div *ngIf="submitted && form['dataServico'].errors" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+                <div *ngIf="form['dataServico'].errors">Este campo é obrigatório</div>
+              </div>
+            </div>
+            <div class="mb-3 w-[60%] mx-1.5 ml-2 mt-2">
+              <label
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Estado</label>
+              <select class="form-select appearance-none
+                block
+                w-full
+                h-[25px]
+                px-2
+                text-[11px]
+                sm:text-[13px]
+                text-base
+                font-normal
+                text-gray-700
+                bg-white bg-clip-padding bg-no-repeat
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="estadoServico"
+                placeholder="Selecione"
+                [ngClass]="{ 'is-invalid': submitted && form['estadoServico'].errors }"
+                (click)="getCidades()"
+                >
+                <option value="" disabled selected>
+                  Selecione uma opção</option>
+                <option
+                *ngFor="let item of listEstados" value="{{item.sigla}}"
+                >{{item.nome}}</option>
+            </select>
+            <div *ngIf="submitted && form['estadoServico'].errors" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+              <div *ngIf="form['estadoServico'].errors">Este campo é obrigatório</div>
+            </div>
+            </div>
+            <div class="mb-3 w-[60%] mr-4 ml-4 sm:mr-1 mt-2">
+              <label
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Cidade</label>
+              <select class="form-select appearance-none
+                block
+                w-full
+                h-[25px]
+                px-2
+                text-[11px]
+                sm:text-[13px]
+                text-base
+                font-normal
+                text-gray-700
+                bg-white bg-clip-padding bg-no-repeat
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="cidadeServico"
+                placeholder="Selecione"
+                [ngClass]="{ 'is-invalid': submitted && form['cidadeServico'].errors }"
+                >
+                <option value="" disabled selected>
+                  Selecione uma opção</option>
+                <option
+                value="São Bernardo do Campo"
+                >São Bernardo do Campo</option>
+            </select>
+            <div *ngIf="submitted && form['cidadeServico'].errors" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+              <div *ngIf="form['cidadeServico'].errors">Este campo é obrigatório</div>
+            </div>
+            </div>
+          </div>
+          <div class="flex flex-row sm:flex-none w-[100%] sm:w-[40%]">
+            <div class=" w-[60%] mr-3 ml-5 mt-2">
+              <label
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Codigo do serviço</label>
+              <select class="form-select appearance-none
+                block
+                w-full
+                h-[25px]
+                px-2
+                text-[11px]
+                sm:text-[13px]
+                text-base
+                font-normal
+                text-gray-700
+                bg-white bg-clip-padding bg-no-repeat
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="codigo"
+                placeholder="Selecione"
+                (click)="changeService()"
+                [ngClass]="{ 'is-invalid': submitted && form['codigo'].errors }"
+                #tooltip="matTooltip"
+                [matTooltip]="serviceToolTip"
+                matTooltipPosition="below"
+                >
+                <option value="" disabled selected>
+                  Selecione uma opção</option>
+                <option
+                *ngFor="let item of listCodigoServico; let i = index" value="{{item.valor}}"
+                >{{item.nome}}</option>
+            </select>
+            <div *ngIf="submitted && form['codigo'].errors" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+              <div *ngIf="form['codigo'].errors">Este campo é obrigatório</div>
+            </div>
+            </div>
+            <div class="mb-3 w-[40%] mr-4 ml-1 mt-[7px]">
+              <label
+                for="exampleText0"
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+                >Aliquota(%)</label
+              >
+              <input
+                type="text"
+                mask="0,00"
+                class="form-control block w-full h-[25px] px-3 py-0.5 font-normal text-[11px] sm:text-sm text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                placeholder="Não selecionado"
+                formControlName="aliquota"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-start w-full bg-white">
+        <div class="flex flex-row w-[100%] my-3">
+          <div class="mb-3 w-[100%] mx-4 ml-5 -mt-2">
+            <label
+              for="exampleText0"
+              class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+              >Descrição</label
+            >
+            <textarea
+              type="text"
+              class="form-control block w-full h-[90px] px-3 py-0.5 font-normal text-[11px] sm:text-sm text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+              formControlName="descricao"
+              placeholder="Digite aqui a descrição"
+              (keyup)="upperText('descricao')"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="shadow-md -mt-3">
+        <div class="border-b bg-gray-200">
+          <h2
+            class="transition-transform duration-700 text-sm ease-in-out origin-left text-gray-700 text-md ml-4 mt-3 pt-2 py-1"
+          >
+            Valores:
+          </h2>
+        </div>
+        <div class="flex w-full bg-white">
+          <div class="flex sm:flex-row flex-col w-[100%] my-3">
+            <div class="w-full sm:w-[50%] flex flex-row sm:flex-none">
+              <div class="mb-3 w-[50%] mx-4 ml-5 mt-2">
+                <label
+                  class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+                  >Valor do serviço</label
+                >
+                <input
+                  type="text"
+                  class="form-control block w-full h-[25px] px-3 py-0.5 font-normal text-[11px] sm:text-sm text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                  placeholder="0,00"
+                  formControlName="valorServico"
+                  mask="separator.2" thousandSeparator="." decimalSeparator=","
+                  [dropSpecialCharacters]="false"
+                  [ngClass]="{ 'is-invalid': submitted && form['valorServico'].errors }"
+
+                />
+                <div *ngIf="submitted && form['valorServico'].errors" class="text-[10px] sm:text-[11px] ml-3 mt-0.5 text-red-500">
+                  <div *ngIf="form['valorServico'].errors && form['valorServico'].value === ''">Este campo é obrigatório</div>
+                  <div *ngIf="form['valorServico'].value !== '' && form['valorServico'].value.length < 3">Minimo 3 digitos</div>
+                </div>
+              </div>
+              <div class="mb-3 w-[50%] mx-2 ml-2 mt-2">
+                <label
+                  class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+                  >Base de calculo</label
+                >
+                <input
+                  type="text"
+                  class="form-control block w-full h-[25px] px-3 py-0.5 font-normal text-[11px] sm:text-sm text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                  placeholder="0,00"
+                  formControlName="baseCalc"
+                  mask="separator.2" thousandSeparator="." decimalSeparator=","
+                />
+              </div>
+            </div>
+            <div class="w-full sm:w-[50%] flex flex-row sm:flex-none">
+              <div class="mb-3 w-[50%] sm:mx-2 mx-4 sm:ml-3 ml-5 mt-2">
+                <label
+                  class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+                  >Valor liquido da nota</label
+                >
+                <input
+                  type="text"
+                  class="form-control block w-full h-[25px] px-3 py-0.5 font-normal text-[11px] sm:text-sm text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                  placeholder="0,00"
+                  formControlName="valorLiquido"
+                  mask="0,00||00,00||000,00||0.000,00||00.000,00||000.000,00||0.000.000,00"
+                />
+              </div>
+              <div class="mb-3 w-[50%] sm:mx-4 mx-2 sm:ml-3 ml-2 mt-2">
+                <label
+                  class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+                  >Valor do ISS a pagar</label
+                >
+                <input
+                  type="text"
+                  class="form-control block w-full h-[25px] px-3 py-0.5 font-normal text-[11px] sm:text-sm text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                  placeholder="0,00"
+                  formControlName="valorISS"
+                  mask="0,00||00,00||000,00||0.000,00||00.000,00||000.000,00||0.000.000,00"
+                  [dropSpecialCharacters]="false"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-full bg-white -mt-3 mb-3">
+        <div class="flex justify-center sm:w-[100%] my-3 ">
+            <button
+            type="submit"
+            class="sm:w-40 w-full px-auto mx-2 py-1 sm:py-2 my-3 mb-6 sm:ml-5 sm:h-8 h-7  bg-green-800 text-white font-medium text-[11px] md:text-[12px] leading-snug uppercase rounded shadow-md hover:bg-green-900 hover:shadow-lg focus:bg-green-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out"
+            >
+            Emitir Nota
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div *ngIf="isLoading">
+    <app-loading></app-loading>
+  </div>
+</div>

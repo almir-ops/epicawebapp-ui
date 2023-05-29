@@ -1,0 +1,115 @@
+<div
+  class="w-full h-screen flex justify-center bg-gradient-to-b from-[#f3f3f3] to-[#e4e4e4] relative"
+>
+  <div class="grid grid-cols-1 content-center">
+    <div
+      class="w-[80%] h-[390px] mx-auto -mt-16 sm:-mt-10 shadow-lg bg-white rounded-[4px] border-2 border-t-green-800"
+    >
+      <img
+        class="mx-auto mt-7 px-6"
+        src="./assets/images/logo-cemiterio-particular-jardim-da-colina-color.png"
+      />
+      <div class="flex justify-center">
+        <div class="grid grid-cols-1 w-[90%]">
+          <form [formGroup]="formLogin">
+            <input
+              class="w-full h-10 border-b-2 {{
+                styleBorderUser
+              }} mt-7 p-2 focus:outline-none"
+              placeholder="Usuario"
+              formControlName="username"
+              autocomplete="true"
+              (keyup)="enableBtnLogin(); showAlertUser()"
+              (blur)="showAlertUser()"
+            />
+            <div *ngIf="userNull">
+              <span class="text-red-500 text-[10px]">*Campo obrigatório</span>
+            </div>
+            <div class="relative">
+              <input
+                class="w-full h-10 border-b-2 {{
+                  styleBorderPassword
+                }} mt-3 p-2 focus:outline-none"
+                placeholder="Senha"
+                formControlName="password"
+                (blur)="showAlertPassword()"
+                (keyup)="enableBtnLogin(); showAlertPassword()"
+                [type]="hiddenPassword ? 'text' : 'password'"
+              />
+              <div (click)="viewPassword()" class="cursor-pointer">
+                <img
+                  *ngIf="!hiddenPassword"
+                  src="./assets/icons/eye.svg"
+                  class="h-4 absolute right-3 -mt-[30px]"
+                />
+                <img
+                  *ngIf="hiddenPassword"
+                  src="./assets/icons/eye-slash.svg"
+                  class="h-4 absolute right-3 -mt-[30px]"
+                />
+              </div>
+              <div *ngIf="passwordNull">
+                <span class="text-red-500 text-[10px]">*Campo obrigatório</span>
+              </div>
+            </div>
+            <div class="flex items-center mb-5 mt-1"></div>
+            <button class="{{ styleBtn }} text-center text-white rounded py-2 w-full " (click)="login()" [disabled]="!formLogin.valid">
+              <div
+                class="font-bold">
+                Entrar
+              </div>
+            </button>
+          </form>
+          <div class="flex mt-3 pt-1">
+            <input
+              id="default-checkbox"
+              type="checkbox"
+              value="checked"
+              [(ngModel)]="checked"
+              class="w-4 h-4 text-green-600 bg-gray-100 rounded accent-green-800 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600"
+            />
+            <label
+              for="default-checkbox"
+              class="ml-2 mb-1 text-sm font-medium text-green-900 dark:text-gray-300"
+              >Lembrar usuário
+            </label>
+          </div>
+          <button
+            class="hover:text-green-800 text-green-700 text-sm font-bold py-2 px-4 h-5 mt-2 rounded mb-2"
+            (click)="forgotPassword()"
+          >
+            Esqueceu a senha?
+          </button>
+        </div>
+      </div>
+
+    </div>
+    <div
+        *ngIf="invalidUser"
+        class="bg-red-100 border w-[80%] border-red-400 text-red-700 px-4 py-3 mx-auto mt-2 rounded relative"
+        role="alert"
+      >
+        <strong class="font-bold text-sm">Atenção:</strong>
+        <span class="block sm:inline ml-1 mr-8 text-sm whitespace-pre-wrap">{{msgAlert}}</span>
+        <span
+          class="absolute top-0 bottom-0 right-0 px-2 py-3"
+          (click)="closeAlert()"
+        >
+          <svg
+            class="fill-current h-6 w-6 text-red-500 "
+            role="button"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <title>Close</title>
+            <path
+              d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
+            />
+          </svg>
+        </span>
+    </div>
+    </div>
+  <div *ngIf="isLoading">
+    <app-loading></app-loading>
+  </div>
+</div>

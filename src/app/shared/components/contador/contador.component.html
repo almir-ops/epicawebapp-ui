@@ -1,0 +1,53 @@
+<div class="relative" >
+  <div class="bg-white {{isOpen}} fixed right-8 bottom-9 border border-slate-300 shadow-md rounded-md duration-200">
+    <div class="grid grid-cols-4 h-[50px]">
+      <div class="ml-2 grid content-center col-span-3">
+        <h3 class="text-xs text-gray-900">{{message}}</h3>
+      </div>
+      <div class="flex justify-end mr-2.5 mt-[18px] cursor-pointer" (click)="close()" *ngIf="expandContador">
+        <img src="./assets/icons/arrow.svg" class="h-3 w-3">
+      </div>
+      <div class="flex justify-end mr-2.5 mt-[18px] cursor-pointer" (click)="close()" *ngIf="!expandContador">
+        <img src="./assets/icons/arrow.svg" class="h-3 w-3 rotate-180">
+      </div>
+    </div>
+    <div *ngIf="expandContador === true" class="overflow-auto h-[150px]">
+      <table class="w-[300px]">
+        <thead class="bg-gray-200 border-b sticky top-0">
+          <tr>
+            <th
+              scope="col"
+              class="text-xs font-normal text-gray-700 px-3 py-2"
+            >
+              Proposta
+            </th>
+            <th
+              scope="col"
+              class="text-xs font-normal text-gray-700 py-2"
+            >
+              Nome
+            </th>
+          </tr>
+        </thead>
+
+        <tbody class="max-h-[400px] overflow-y-auto">
+          <tr
+            class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
+            *ngFor="let item of listDocSaves"
+          >
+            <td
+              class="text-sm text-gray-900 font-light px-6 py-2.5 whitespace-nowrap text-center"
+            >
+            {{item.proposta}}
+            </td>
+            <td
+              class="text-sm font-normal text-gray-900 px-6 py-2 whitespace-nowrap text-center"
+            >
+            {{item.nome}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,158 @@
+<div>
+  <h1
+    class="transition-transform duration-700 ease-in-out origin-left text-gray-900 text-xl ml-4 mt-3"
+  >
+    Envio de e-mail de cobrança
+  </h1>
+  <h3
+  class="transition-transform duration-700 ease-in-out origin-left text-gray-800 text-xs ml-4"
+  >
+    Digite a proposta ou uma data para pesquisar devedores
+  </h3>
+  <div>
+
+    <form [formGroup]="formSendEmail" (submit)="searchContracts()">
+      <div class="flex flex-col md:flex-row w-full">
+        <div class="flex flex-row w-full md:w-[30%]">
+          <div class="mb-1.5 mx-4 ml-4 mt-2 w-[60%]">
+            <label class="form-label mb-1 text-gray-700 text-[11px] sm:text-sm"
+              >Proposta</label
+            >
+            <input
+              type="text"
+              class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 duration-100 rounded transition ease-in-out m-0 mr-2 focus:outline outline-gray-600"
+              placeholder="Digite a proposta"
+              formControlName="proposta"
+            />
+          </div>
+          <div class="mb-1.5 mx-4 ml-4 mt-2 w-[50%] md:w-[40%]">
+            <label class="form-label mb-1 text-gray-700 text-[11px] sm:text-sm"
+              >Data</label
+            >
+            <input
+              type="date"
+              class="block w-full h-[25px] px-2 py-0.5 text-[11px] sm:text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 duration-100 rounded transition ease-in-out m-0 mr-2 focus:outline outline-gray-600"
+              placeholder="Digite a proposta"
+              formControlName="dtVencimento"
+            />
+          </div>
+        </div>
+        <div class="flex flex-row">
+          <div class="mb-1.5 mx-4 mt-2">
+            <label class="form-label mb-1 text-gray-700 text-[11px] sm:text-sm"
+              >Quantidade</label
+            >
+            <input
+              type="number"
+              class="
+              block
+              w-full
+              h-[25px]
+              px-3
+              py-0.5
+              text-[11px] sm:text-sm
+              font-normal
+              text-gray-700
+              {{ cssQuantityInput }} bg-clip-padding
+              border border-solid border-gray-300
+              rounded
+              transition
+              ease-in-out
+              m-0
+              mr-2
+              focus:outline outline-gray-600
+              "
+              id="exampleText0"
+              placeholder="Digite a quantidade"
+              formControlName="quantidade"
+            />
+          </div>
+          <div class="mb-1.5 mx-4 mt-3 flex flex-col">
+            <label class="form-label inline-block mb-1 text-gray-700 text-[10px] sm:text-sm"
+              >Buscar todos</label
+            >
+            <mat-slide-toggle
+              formControlName="allEmails"
+              (toggleChange)="checkToggle()"
+            >
+            </mat-slide-toggle>
+
+          </div>
+          <div class="mb-1.5 mt-3 ml-2 flex flex-col">
+            <label class="form-label inline-block mb-1 text-gray-700 text-[10px] sm:text-sm"
+              >Envio de teste</label>
+            <mat-slide-toggle
+              formControlName="sendProd"
+              (toggleChange)="checkToggleProd()"
+            >
+            </mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+      <div class="ml-2 mr-2 my-3">
+        <div class="flex flex-col sm:flex-row w-full">
+          <div class="w-full sm:w-[300px] flex flex-row">
+            <button
+              type="submit"
+              class="px-auto py-2 sm:w-[130px] w-[50%] h-[32px] bg-green-800 text-white font-medium text-[10px] md:text-[11px] leading-snug uppercase rounded shadow-md hover:bg-green-900 hover:shadow-lg focus:bg-green-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-900 active:shadow-lg transition duration-150 ease-in-out mx-2"
+            >
+              Pesquisar
+            </button>
+            <button
+              type="button"
+              class=" px-auto py-2 sm:w-[130px] w-[50%] h-[32px] group {{
+                styleSendBtn
+              }} text-white font-medium text-[10px] md:text-[12px] leading-snug uppercase rounded focus:shadow-lg focus:outline-none focus:ring-0 transition duration-150 ease-in-out mx-2"
+              (click)="openDialogConfirmation()"
+              [disabled]="disabledBtn"
+            >
+            <div class="flex flex-row justify-center">
+              Enviar
+              <!--
+                <div *ngIf="sending">
+                  <img src="./assets/icons/dual-loading.svg" class="animate-spin h-4 w-4 mx-1.5 bg-sky-700 group-hover:bg-sky-800 rounded-full duration-150">
+                </div>
+              -->
+            </div>
+            </button>
+          </div>
+          <div *ngIf="this.dataSource.data.length > 0" class="w-full flex flex-row mt-3 sm:mt-0">
+            <div class="ml-1">
+              <app-informations
+                [listFoundContrats]="foundContracts"
+                [listErrorContrats]="listErrorEmails"
+                [listSendContrats]="listSentEmails"
+              ></app-informations>
+            </div>
+            <div class="flex justify-end sm:mr-1 mr-2 w-full">
+              <button
+                type="button"
+                (click)="clear()"
+                class="sm:w-[130px] w-24 h-[32px] px-auto py-2 bg-white text-gray-700 font-medium text-[10px] md:text-[11px] leading-snug uppercase rounded shadow-md hover:bg-[#f1f1f1] hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out"
+              >
+                Limpar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+  <div class="px-4 pb-2">
+    <app-mat-table-checkbox
+      [dataSource]="dataSource"
+      [tablePaginator]="tablePaginator"
+      [displayedColumns]="displayedColumns"
+      (selectedContracts)="listSelected($event)"
+      ></app-mat-table-checkbox>
+    <ng-template #tablePaginator>
+        <mat-paginator #paginator [pageSizeOptions]="[10,20,50,100]" showFirstLastButtons></mat-paginator>
+    </ng-template>
+  </div>
+
+  <div *ngIf="isLoading">
+    <app-loading></app-loading>
+  </div>
+</div>

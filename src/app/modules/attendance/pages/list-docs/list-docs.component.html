@@ -1,0 +1,278 @@
+<div>
+  <h1
+    class="transition-transform duration-700 ease-in-out origin-left text-gray-900 text-xl ml-4 mt-3"
+
+  >
+    Pesquisa de documentos
+  </h1>
+  <h3
+  class="transition-transform duration-700 ease-in-out origin-left text-gray-800 text-xs ml-4"
+  >
+    Digite uma proposta ou um nome para pesquisar
+  </h3>
+  <div class="flex justify-center sm:flex-none">
+    <form
+      [formGroup]="formSearch"
+      class="flex flex-col justify-center w-[95%] sm:w-full"
+    >
+      <div class="flex flex-col lg:flex-row w-[100%]">
+        <div class="flex flex-row">
+          <div class="mb-1.5 mx-3 ml-3 sm:ml-4 mt-2">
+            <label class="inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+              >N° da Proposta</label
+            >
+            <input
+              type="text"
+              class="
+              block
+              w-full
+              h-[25px]
+              px-3
+              py-0.5
+              text-[11px] sm:text-sm
+              font-normal
+              text-gray-700
+              bg-white bg-clip-padding
+              border
+              {{ alertStyle }}
+              rounded
+              transition
+              ease-in-out
+              m-0
+              mr-2
+              focus:outline-none
+              focus:border-gray-800
+              focus:border-opacity-75
+              "
+              (keyup)="styleInput()"
+              id="exampleText0"
+              placeholder="Digite a proposta"
+              formControlName="proposta"
+            />
+          </div>
+          <div class="mb-1.5 mx-3 mt-2 w-[60%]">
+            <label class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+              >Nome</label
+            >
+            <input
+              type="text"
+              class="
+              block
+              w-full
+              h-[25px]
+              px-3
+              py-0.5
+              text-[11px] sm:text-sm
+              font-normal
+              text-gray-700
+              bg-white bg-clip-padding
+              border
+              {{ alertStyle }}
+              rounded
+              transition
+              ease-in-out
+              m-0
+              mr-2
+              focus:outline-none
+              focus:border-gray-800
+              focus:border-opacity-75
+              "
+              (keyup)="styleInput()"
+              id="exampleText0"
+              placeholder="Digite o nome e sobrenome"
+              formControlName="cliente"
+              autofocus
+            />
+          </div>
+        </div>
+        <div class="flex flex-row">
+          <div class="mb-1.5 w-[32%] md:w-auto mx-3 mt-0 sm:mt-2">
+            <label
+              for="exampleText0"
+              class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+              >Quadra</label
+            >
+            <input
+              type="text"
+              class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-gray-500 border-opacity-50 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+              id="exampleText0"
+              placeholder="Digite a quadra"
+              formControlName="quadra"
+              (keyup)="upperTextQuadra()"
+            />
+          </div>
+          <div class="mb-1.5 w-[32%] md:w-auto mx-2 mt-0 sm:mt-2">
+            <label
+              for="exampleText0"
+              class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+              >Setor</label
+            >
+            <input
+              type="text"
+              class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-gray-500 border-opacity-50 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+              id="exampleText0"
+              placeholder="Digite o setor"
+              formControlName="setor"
+
+              />
+          </div>
+          <div class="mb-1.5 w-[32%] mx-3 mt-0 sm:mt-2">
+            <label
+              for="exampleText0"
+              class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+              >Lote</label
+            >
+            <input
+              type="text"
+              class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-gray-500 border-opacity-50 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+              id="exampleText0"
+              placeholder="Digite o lote"
+              formControlName="lote"
+            />
+          </div>
+        </div>
+        <div class="xl:w-auto mx-3 md:mx-2 mt-0 sm:mt-2">
+          <label class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+            >Falecimento</label
+          >
+          <input
+            type="date"
+            class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-gray-500 border-opacity-50 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+            placeholder="Data do falecimento"
+            formControlName="dtFalecimento"
+          />
+        </div>
+      </div>
+
+      <div class="mt-4 mb-6 ml-2 flex justify-between">
+        <div class="flex justify-start">
+          <button
+            (click)="searchByParams()"
+            class="px-auto py-2 sm:w-[130px] w-24 h-[32px] bg-green-800 text-white font-medium text-[10px] md:text-[11px] leading-snug uppercase rounded shadow-md hover:bg-green-900 hover:shadow-lg focus:bg-green-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-900 active:shadow-lg transition duration-150 ease-in-out mx-2"
+          >
+            Pesquisar
+          </button>
+          <button
+            type="button"
+            (click)="navegate('atendimento/new')"
+            class="sm:w-[130px] w-24 h-[32px] px-auto py-2 bg-gray-500 text-white font-medium text-[10px] md:text-[11px] leading-snug uppercase rounded shadow-md hover:bg-gray-600 hover:shadow-lg focus:bg-gray-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-700 active:shadow-lg transition duration-150 ease-in-out"
+          >
+            Novo
+          </button>
+        </div>
+        <div class="flex justify-end mr-2 sm:mr-4" *ngIf="this.dataSource.data.length > 0">
+          <button
+            type="button"
+            (click)="clearList()"
+            class="sm:w-[130px] w-24 h-[32px] px-auto py-2 bg-white text-gray-700 font-medium text-[10px] md:text-[11px] leading-snug uppercase rounded shadow-md hover:bg-[#f1f1f1] hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out"
+          >
+            Limpar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="px-4 pb-2">
+    <div class="w-full h-max-[500px] example-container mat-elevation-z2 rounded-t-lg">
+      <div class="example-table-container rounded-lg">
+        <table mat-table [dataSource]="dataSource" class="w-full h-max-[500px] rounded-lg">
+          <!-- Prosposta Column -->
+          <ng-container matColumnDef="proposta">
+            <th mat-header-cell *matHeaderCellDef> Proposta </th>
+            <td mat-cell *matCellDef="let element"  class="whitespace-nowrap mx-2 pl-3">
+              <div class="pr-3 text-xs sm:text-sm">
+                {{element.proposta}}
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Nome Column -->
+          <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let element" class="whitespace-nowrap px-2">
+              <div class="pr-3 text-xs sm:text-sm">
+                {{element.cliente}}
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Quadra Column -->
+          <ng-container matColumnDef="quadra">
+            <div class="px-3 sm:px-0">
+              <th mat-header-cell *matHeaderCellDef> Quadra </th>
+            </div>
+            <td mat-cell *matCellDef="let element"  class="whitespace-nowrap px-2">
+              <div class="pr-12 px-3 text-xs sm:text-sm">
+                {{element.quadra}}
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Setor Column -->
+          <ng-container matColumnDef="setor">
+            <th mat-header-cell *matHeaderCellDef> Setor </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="pr-12 px-1.5 text-xs sm:text-sm">
+                {{element.setor}}
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Lote Column -->
+          <ng-container matColumnDef="lote">
+            <th mat-header-cell *matHeaderCellDef> Lote </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="pr-12 text-xs sm:text-sm">
+                {{element.lote}}
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Ações Column -->
+          <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef> Ações </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="cursor-pointer">
+                <div
+                  class="cursor-pointer flex flex-row justify-center sm:justify-start sm:-ml-4"
+                >
+                  <img
+                    class="w-6 h-6 px-1 mt-[3px] hover:scale-125 duration-300"
+                    (click)="showDetails(element)"
+                    src="/assets/icons/eye.svg"
+                    title="Ver detalhes"
+                  />
+                  <img
+                    class="w-6 h-6 px-1 mt-[3px] hover:scale-125 duration-300"
+                    (click)="showEditDoc(element)"
+                    src="/assets/icons/pencil.svg"
+                    title="Editar"
+                  />
+                  <img
+                    class="w-6 h-6 px-1 mt-[3px] hover:scale-125 duration-300"
+                    (click)="showDeleteDoc(element)"
+                    src="/assets/icons/lixeira.svg"
+                    title="Excluir"
+                  />
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+              (click)="selection.toggle(row)">
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="mat-elevation-z2 rounded-b-lg">
+      <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons ></mat-paginator>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading">
+    <app-loading></app-loading>
+  </div>
+</div>

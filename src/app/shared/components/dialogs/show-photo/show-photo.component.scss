@@ -1,0 +1,17 @@
+.container {
+  position: relative;
+  width: 500px;
+  height: 500px;
+}
+
+.lens {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0.5;
+  border: 1px solid #ddd;
+}

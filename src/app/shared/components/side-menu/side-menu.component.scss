@@ -1,0 +1,13 @@
+.arrow-animate {
+  opacity: 1;
+  transition-delay: 2s;
+}
+
+@keyframes show-arrow {
+  from {
+    transform: translateX(100);
+  }
+  to{
+    transform: translateX(0);
+  }
+}

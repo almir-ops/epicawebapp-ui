@@ -1,0 +1,65 @@
+<div class="bg-white w-[600px] overflow-hidden shadow-md sm:rounded-b-lg">
+  <div class="flex flex-col">
+    <div class="overflow-x-auto">
+      <div class="w-full">
+        <div class="block max-h-[350px]">
+          <table class="w-full">
+            <thead class="bg-gray-200 border-b sticky top-0">
+              <tr>
+                <th
+                  scope="col"
+                  class="text-sm font-normal text-gray-700 px-3 py-2"
+                >
+                  Código
+                </th>
+                <th
+                  scope="col"
+                  class="text-sm font-normal text-gray-700  py-2"
+                >
+                  Nome do grupo
+                </th>
+                <th
+                  scope="col"
+                  class="text-sm font-normal text-gray-700  py-2"
+                >
+                  Ação
+                </th>
+              </tr>
+            </thead>
+            <tbody class="max-h-[500px] overflow-y-auto" >
+              <tr
+                class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
+                *ngFor="let grupo of listGrupos ;index as i"
+              >
+                <td
+                  class="text-sm font-medium text-gray-900 px-6 py-4 whitespace-nowrap text-center"
+                >
+                  {{ grupo.codigo }}
+                </td>
+                <td
+                  class="text-sm font-medium text-gray-900 px-6 py-4 whitespace-nowrap text-center"
+                >
+                  {{ grupo.nome }}
+                </td>
+                <td
+                  class="text-sm font-medium text-gray-900 px-6 py-4 whitespace-nowrap text-center"
+                >
+                <div
+                class="cursor-pointer flex justify-center "
+              >
+                <div
+                class="bg-gray-200 px-2 rounded-full hover:scale-105 ease-in-out whitespace-nowrap"
+                [mat-dialog-close]="grupo" cdkFocusInitial
+                >
+                Adicionar grupo</div>
+
+                </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,136 @@
+<div
+  class="absolute sm:relative bg-white h-[100vh] shadow-md z-20 flex transform"
+>
+  <div class="sidebar relative {{ open }} px-1 duration-75 lg:flex lg:flex-col">
+    <div class="pt-4 pb-2 px-3 ml-1.5">
+      <div>
+        <div class="flex items-center">
+          <div class="shrink-0 mt-3 -ml-1.5" *ngIf="!isOpen">
+            <img
+              src="./assets/images/download.png"
+              class="rounded-full w-8 hidden md:flex"
+              alt="Avatar"
+            />
+              <img
+                src="./assets/icons/search.svg "
+                class="mr-2 ml-2 w-4 h-4 mt-8 whitespace-nowrap rounded hover:text-green-600 hover:bg-green-50 hidden md:flex"
+                alt="Jardim da colina"
+                (click)="hiddenMenu(); searchFocus()"
+              />
+          </div>
+          <div class="grow text-sm mt-3 -ml-3 relative" *ngIf="isOpen">
+            <img
+              src="./assets/images/logo-cemiterio-particular-jardim-da-colina-color.png"
+              class="mr-2 w-full h-9"
+              alt="Jardim da colina"
+            />
+            <input
+              #search
+              class="h-7 w-full rounded-full border-[1px] pr-2 pl-7 mt-6 focus:outline outline-offset-2 outline-1 outline-green-600"
+              placeholder="Pesquisar"
+              (keyup)="handleInput($event)"
+            />
+            <img
+              src="./assets/icons/search.svg "
+              class="mr-2 ml-2 w-4 h-4 absolute -mt-[22px]"
+              alt="Jardim da colina"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="menuItems.length >= 1">
+      <ul class="relative px-1 mt-1">
+        <div *ngFor="let item of menuItems | filter: title">
+          <li class="relative">
+            <div *ngIf="!item.subMenu">
+              <a
+                (click)="changeScreen(item.url)"
+                class="flex items-center text-sm py-4 px-1 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-green-600 hover:bg-green-50 cursor-pointer"
+                data-mdb-ripple="true"
+                data-mdb-ripple-color="primary"
+                data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#' + item.title"
+                aria-expanded="false"
+                aria-controls="collapseSidenavSecEx2"
+              >
+                <img [src]="item.icon" class="w-4 h-4 mr-3 sm:ml-3 lg:mr-6" />
+                <div class="w-full" *ngIf="isOpen">
+                  <div class="mt-0.5">
+                    <span class="">{{ item.title }}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div *ngIf="item.subMenu">
+              <button
+                (click)="showMenu()"
+                class="flex items-center text-sm py-4 px-1 h-12 w-full overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-green-600 hover:bg-green-50 transition duration-300 ease-in-out cursor-pointer"
+                data-mdb-ripple="true"
+                data-mdb-ripple-color="primary"
+                data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#' + item.title"
+                aria-expanded="false"
+                aria-controls="collapseSidenavSecEx2"
+              >
+                <img [src]="item.icon" class="w-4 h-4 mr-3 ml-3 lg:mr-6" />
+                <div class="w-full flex flex-row justify-between" *ngIf="isOpen">
+                  <div class="">
+                    <span class="">{{ item.title }}</span>
+                  </div>
+                  <div
+                    *ngIf="item.subMenu"
+                    class="duration-300 delay-100 transition transform flex justify-end "
+                  >
+                    <img
+                      src="./assets/icons/arrow.svg"
+                      class="w-3 h-3 mr-3 ml-4 mt-1"
+                    />
+                  </div>
+                </div>
+              </button>
+            </div>
+            <ul
+              class="relative accordion-collapse collapse"
+              [id]="item.title"
+              *ngIf="isOpen"
+            >
+              <li
+                class="relative cursor-pointer"
+                *ngFor="let itemSubMenu of item.subMenu"
+              >
+                <a
+                  (click)="changeScreen(itemSubMenu.url)"
+                  class="flex items-center text-xs py-4 pl-7 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-green-600 hover:bg-green-50 transition duration-300 ease-in-out"
+                  data-mdb-ripple="true"
+                  data-mdb-ripple-color="primary"
+                  >{{ itemSubMenu.subTitle }}</a
+                >
+              </li>
+            </ul>
+          </li>
+        </div>
+      </ul>
+    </div>
+    <div *ngIf="menuItems.length === 0 && isOpen">
+      <div class="w-full mt-4">
+        <img class="mx-auto w-8 h-8" src="/assets/icons/lock.svg">
+      </div>
+      <div class="w-full text-center text-gray-700 px-2">
+        Nenhuma permissão concedida ao usuário atual
+      </div>
+    </div>
+  </div>
+  <div
+    class="rounded-full top-3.5 sm:top-6 -right-10 absolute bg-white border-2 h-[30px] w-[30px] cursor-pointer"
+    (click)="hiddenMenu()"
+  >
+    <img class="w-5 h-5 mx-auto mt-[3px]" src="/assets/icons/bars.svg" />
+  </div>
+</div>
+<div *ngIf="isOpen">
+  <div
+    class="w-full h-full bg-black opacity-50 absolute z-10 sm:z-0 flex sm:hidden overflow-y-hidden"
+    (click)="hiddenMenu()"
+  ></div>
+</div>

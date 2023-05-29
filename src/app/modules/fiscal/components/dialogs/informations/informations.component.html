@@ -1,0 +1,474 @@
+<div >
+  <h2 mat-dialog-title>{{data.title}}</h2>
+  <h3
+  class="transition-transform duration-700 ease-in-out origin-left text-gray-800 text-md -mt-5 mb-3"
+  >
+    Confira os dados e clique em CONFIRMAR para gerar a nota fiscal
+  </h3>
+  <mat-dialog-content class="mat-typography mt-6">
+    <div class="bg-green-100 border border-green-400 rounded-md relative">
+
+      <div class="w-full bg-green-400 text-center">
+        <h4 class="text-white text-lg">Dados do cliente</h4>
+      </div>
+      <form [formGroup]="formCurrentNota">
+        <div class="px-2 pb-2">
+          <div class="flex xl:flex-none w-[100%]">
+            <!--Nome Tomador-->
+            <div class="mb-3 w-[50%] mx-1.5 ml-2 mt-2">
+             <label
+               class="mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+               >Nome Tomador</label>
+             <input class="
+               block
+               w-full
+               h-[25px]
+               px-2
+               text-[11px]
+               sm:text-[13px]
+               text-base
+               font-normal
+               text-gray-700
+               bg-white bg-clip-padding bg-no-repeat
+               border border-solid border-gray-300
+               rounded
+               transition
+               ease-in-out
+               m-0
+               focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+               formControlName="tomador"
+               />
+
+            </div>
+            <div class="mb-3 w-[20%] mx-1.5 ml-2 mt-2">
+            <label
+              class="mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+              >Tipo</label>
+            <input class="
+              block
+              w-full
+              h-[25px]
+              px-2
+              text-[11px]
+              sm:text-[13px]
+              text-base
+              font-normal
+              text-gray-700
+              bg-white bg-clip-padding bg-no-repeat
+              border border-solid border-gray-300
+              rounded
+              transition
+              ease-in-out
+              m-0
+              focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+              formControlName="tipo"
+              />
+
+            </div>
+            <div class="mb-3 w-[30%] ml-2 mt-2">
+             <label
+               class="text-gray-700 text-[12px]"
+               >CPF/CNPJ</label
+             >
+             <input
+               class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+               formControlName="cpf"
+               mask="00.000.000/0000-00 || 000.000.000-00"
+
+             />
+            </div>
+           </div>
+           <div class="flex xl:flex-none w-[100%]">
+            <!-- CEP -->
+            <div class="mb-3 w-[20%] mx-1.5 ml-2 mt-2">
+             <label
+               class="mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+               >CEP</label>
+             <input class="
+               block
+               w-full
+               h-[25px]
+               px-2
+               text-[11px]
+               sm:text-[13px]
+               text-base
+               font-normal
+               text-gray-700
+               bg-white bg-clip-padding bg-no-repeat
+               border border-solid border-gray-300
+               rounded
+               transition
+               ease-in-out
+               m-0
+               focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+               formControlName="cep"
+               mask="00000-000"
+               />
+
+            </div>
+            <!-- Estado -->
+            <div class="mb-3 w-[10%] mx-1.5 ml-2 mt-2">
+            <label
+              class="mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+              >Estado</label>
+            <input class="
+              block
+              w-full
+              h-[25px]
+              px-2
+              text-[11px]
+              sm:text-[13px]
+              text-base
+              font-normal
+              text-gray-700
+              bg-white bg-clip-padding bg-no-repeat
+              border border-solid border-gray-300
+              rounded
+              transition
+              ease-in-out
+              m-0
+              focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+              formControlName="estado"
+              />
+
+            </div>
+            <!-- Cidade -->
+            <div class="mb-3 w-[40%] ml-2 mt-2">
+             <label
+               class="text-gray-700 text-[12px]"
+               >Cidade</label
+             >
+             <input
+               class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+               formControlName="cidade"
+             />
+            </div>
+            <!-- Logradouro -->
+            <div class="mb-3 w-[50%] ml-4 mt-2">
+              <label
+                class="mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Logradouro</label>
+              <input class="
+                block
+                w-full
+                h-[25px]
+                px-2
+                text-[11px]
+                sm:text-[13px]
+                text-base
+                font-normal
+                text-gray-700
+                bg-white bg-clip-padding bg-no-repeat
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="logradouro"
+                />
+
+             </div>
+           </div>
+           <div class="flex xl:flex-none w-[100%]">
+
+            <div class="mb-3 w-[20%] mx-1.5 ml-2 mt-2">
+            <label
+              class="mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+              >Numero</label>
+            <input class="
+              block
+              w-full
+              h-[25px]
+              px-2
+              text-[11px]
+              sm:text-[13px]
+              text-base
+              font-normal
+              text-gray-700
+              bg-white bg-clip-padding bg-no-repeat
+              border border-solid border-gray-300
+              rounded
+              transition
+              ease-in-out
+              m-0
+              focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+              formControlName="numero"
+              />
+
+            </div>
+            <div class="mb-3 w-[35%] ml-2 mt-2">
+             <label
+               class="text-gray-700 text-[12px]"
+               >Bairro</label
+             >
+             <input
+               class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+               formControlName="bairro"
+             />
+            </div>
+            <!--Nome Tomador-->
+            <div class="mb-3 w-[40%] ml-4 mt-2">
+              <label
+                class="mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+                >Complemento</label>
+              <input class="
+                block
+                w-full
+                h-[25px]
+                px-2
+                text-[11px]
+                sm:text-[13px]
+                text-base
+                font-normal
+                text-gray-700
+                bg-white bg-clip-padding bg-no-repeat
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="complemento"
+                />
+
+             </div>
+           </div>
+           <div class="flex xl:flex-none w-[100%]">
+
+            <div class="mb-3 w-[35%] mx-1.5 ml-2 mt-2">
+            <label
+              class="mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+              >Email</label>
+            <input class="
+              block
+              w-full
+              h-[25px]
+              px-2
+              text-[11px]
+              sm:text-[13px]
+              text-base
+              font-normal
+              text-gray-700
+              bg-white bg-clip-padding bg-no-repeat
+              border border-solid border-gray-300
+              rounded
+              transition
+              ease-in-out
+              m-0
+              focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+              formControlName="email"
+              />
+
+            </div>
+            <div class="mb-3 w-[30%] ml-2 mt-2">
+             <label
+               class="text-gray-700 text-[12px]"
+               >Telefone</label
+             >
+             <input
+               class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+               formControlName="telefone"
+               mask="(00) 0000-0000 || (00) 00000-0000"
+             />
+            </div>
+            <div class="mb-3 w-[30%] ml-4 mt-2">
+              <label
+                class="text-gray-700 text-[12px]"
+                >Celular</label
+              >
+              <input
+                class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="celular"
+                mask="(00) 0000-0000 || (00) 00000-0000"
+              />
+             </div>
+           </div>
+        </div>
+        <div class="w-full bg-green-400 text-center">
+          <h4 class="text-white text-lg">Dados do serviço</h4>
+        </div>
+        <div class="px-2 pb-2">
+           <div class="flex xl:flex-none w-[100%]">
+            <!--Nome Tomador-->
+            <div class="mb-3 w-[20%] mx-1.5 ml-2 mt-2">
+             <label
+               class="mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+               >Estado</label>
+             <input class="
+               block
+               w-full
+               h-[25px]
+               px-2
+               text-[11px]
+               sm:text-[13px]
+               text-base
+               font-normal
+               text-gray-700
+               bg-white bg-clip-padding bg-no-repeat
+               border border-solid border-gray-300
+               rounded
+               transition
+               ease-in-out
+               m-0
+               focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+               formControlName="estadoServico"
+               />
+
+            </div>
+            <div class="mb-3 w-[40%] mx-1.5 ml-2 mt-2">
+            <label
+              class="mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+              >Cidade</label>
+            <input class="
+              block
+              w-full
+              h-[25px]
+              px-2
+              text-[11px]
+              sm:text-[13px]
+              text-base
+              font-normal
+              text-gray-700
+              bg-white bg-clip-padding bg-no-repeat
+              border border-solid border-gray-300
+              rounded
+              transition
+              ease-in-out
+              m-0
+              focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+              formControlName="cidadeServico"
+              />
+
+            </div>
+            <div class="mb-3 w-[30%] ml-2 mt-2">
+             <label
+               class="text-gray-700 text-[12px]"
+               >Código</label
+             >
+             <input
+               class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+               formControlName="codigo"
+             />
+            </div>
+            <div class="mb-3 w-[10%] ml-2 mt-2">
+              <label
+                class="text-gray-700 text-[12px]"
+                >Aliquota</label
+              >
+              <input
+                class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="aliquota"
+              />
+             </div>
+           </div>
+           <div class="flex xl:flex-none w-[100%]">
+            <!--Nome Tomador-->
+            <div class="mb-3 w-[100%] ml-1.5 mt-2">
+             <label
+               class="mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+               >Descricao</label>
+             <textarea class="
+               block
+               w-full
+               h-[60px]
+               px-2
+               text-[11px]
+               sm:text-[13px]
+               text-base
+               font-normal
+               text-gray-700
+               bg-white bg-clip-padding bg-no-repeat
+               border border-solid border-gray-300
+               rounded
+               m-0
+               focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+               formControlName="descricao"
+               ></textarea>
+
+            </div>
+           </div>
+           <div class="flex xl:flex-none w-[100%]">
+            <!--Nome Tomador-->
+            <div class="mb-3 w-[25%] mx-1.5 ml-2 mt-2">
+             <label
+               class="mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+               >Valor do serviço</label>
+             <input class="
+               block
+               w-full
+               h-[25px]
+               px-2
+               text-[11px]
+               sm:text-[13px]
+               text-base
+               font-normal
+               text-gray-700
+               bg-white bg-clip-padding bg-no-repeat
+               border border-solid border-gray-300
+               rounded
+               transition
+               ease-in-out
+               m-0
+               focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+               formControlName="valorServico"
+               />
+
+            </div>
+            <div class="mb-3 w-[25%] mx-1.5 ml-2 mt-2">
+            <label
+              class="mb-1 text-gray-700 text-[11px] sm:text-[13px]"
+              >Base de calculo</label>
+            <input class="
+              block
+              w-full
+              h-[25px]
+              px-2
+              text-[11px]
+              sm:text-[13px]
+              text-base
+              font-normal
+              text-gray-700
+              bg-white bg-clip-padding bg-no-repeat
+              border border-solid border-gray-300
+              rounded
+              transition
+              ease-in-out
+              m-0
+              focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+              formControlName="baseCalc"
+              />
+
+            </div>
+            <div class="mb-3 w-[25%] ml-2 mt-2">
+             <label
+               class="text-gray-700 text-[12px]"
+               >Valor liquido da nota</label
+             >
+             <input
+               class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+               formControlName="valorLiquido"
+             />
+            </div>
+            <div class="mb-3 w-[25%] ml-2 mt-2">
+              <label
+                class="text-gray-700 text-[12px]"
+                >Valor do ISS a pagar</label
+              >
+              <input
+                class="form-control w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-[13px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="valorISS"
+              />
+             </div>
+           </div>
+        </div>
+      </form>
+
+
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="flex justify-between">
+    <button mat-button mat-dialog-close cdkFocusInitial>Cancelar</button>
+    <button mat-button [mat-dialog-close]="true" >Confirmar</button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,54 @@
+<nav
+  class="relative w-[100%] flex flex-wrap items-center justify-between py-4 bg-white text-gray-500 hover:text-gray-700 focus:text-gray-700 shadow-md navbar navbar-expand-lg navbar-light h-[55px] sm:h-[70px] z-0"
+>
+  <div
+    class="container-fluid w-full flex md:flex-wrap items-center justify-between px-6 -mt-2.5 sm:mt-0"
+  >
+    <ul class="navbar-nav flex flex-col pl-0 list-style-none mr-auto ml-3 mt-1">
+      <li class="nav-item p-2">
+        <div
+          class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0 ml-1 sm:ml-0"
+        >
+          {{ titleNavBar }}
+        </div>
+      </li>
+    </ul>
+
+    <div class="flex items-center relative">
+      <div class="mx-2">
+        <span>{{ currentUser }}</span>
+      </div>
+
+      <div class="dropdown relative">
+        <div
+          class="dropdown-toggle flex items-center hidden-arrow"
+          id="dropdownMenuButton2"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="./assets/icons/user.svg"
+            class="rounded-full"
+            style="height: 20px; width: 20px"
+            alt=""
+            loading="lazy"
+          />
+        </div>
+
+        <ul
+          class="dropdown-menu min-w-max absolute bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none left-auto right-0"
+          aria-labelledby="dropdownMenuButton2"
+        >
+          <li>
+            <a
+              class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100"
+              href="/login"
+              >Sair
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

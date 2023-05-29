@@ -1,0 +1,164 @@
+<div class="bg-gray-100">
+  <div class="flex w-full justify-center flex-col sm:flex-row sm:justify-between">
+    <div class="flex flex-col justify-start sm:mt-2 mt-0 ">
+      <h1
+        class="transition-transform duration-700 ease-in-out origin-left text-gray-900 text-xl sm:mx-7 mx-4 mt-3"
+      >
+        Criar novo usuario
+      </h1>
+      <h3
+      class="transition-transform duration-700 ease-in-out origin-left text-gray-800 text-[12px] sm:text-md sm:mx-7 mx-4 "
+      >
+        Digite todos os campos para criar novo usuario
+      </h3>
+    </div>
+    <div class="flex flex-row justify-end mt-0 sm:mt-6 sm:mr-0 mx-4">
+      <button
+        type="button"
+        (click)="save()"
+        class="sm:w-32 w-full px-auto mr-4 py-1 sm:py-2 mt-3 sm:h-8 h-6 bg-green-800 text-white font-medium text-[10px] md:text-[11px] leading-snug uppercase rounded shadow-md hover:bg-green-900 hover:shadow-lg focus:bg-green-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out"
+      >
+        Salvar
+      </button>
+      <button
+        type="button"
+        (click)="navegate('/ti/lista-usuarios')"
+        class="sm:w-32 w-full px-auto py-1 sm:py-2 mt-3 sm:mt-3 sm:mr-7 sm:h-8 h-6 bg-gray-500 text-white font-medium text-[10px] md:text-[11px] leading-snug uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out"
+      >
+        Voltar
+      </button>
+    </div>
+  </div>
+
+  <form [formGroup]="formUser" class="mt-2">
+    <div class="flex flex-col mx-4 sm:mx-7 shadow-md">
+      <div class="border-b bg-gray-200 rounded-t-md">
+        <h2
+          class="transition-transform duration-700 ease-in-out origin-left text-gray-700 text-sm ml-4 py-1 mt-1"
+        >
+          Usuario:
+        </h2>
+      </div>
+      <div class="flex w-full bg-white">
+        <div class="flex flex-col lg:flex-row w-full my-3">
+          <div class="flex w-[60%]">
+            <div class="mb-3 w-[100%] mx-1.5 ml-4 mt-2">
+              <label
+                class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+                >Nome</label
+              >
+              <input
+                type="text"
+                class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="nome"
+                placeholder="Digite o nome"
+              />
+            </div>
+            <div class="mb-3 w-[40%] mx-3 ml-2 mt-2">
+              <label
+                class="inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+                >Email</label
+              >
+              <input
+                class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="email"
+                placeholder="Digite o e-mail do usuario"
+              />
+            </div>
+          </div>
+
+          <div class="flex w-[30%]">
+            <div class="mb-3 w-[40%] ml-5 lg:ml-0 mt-2">
+              <label
+                class="inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+                >Login</label
+              >
+              <input
+                class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+                formControlName="login"
+                placeholder="Digite o login"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="-mt-1.5 pb-12">
+    <div class="mx-auto px-4 sm:px-7">
+      <div class="bg-white overflow-hidden shadow-md sm:rounded-b-lg">
+        <div class="flex flex-col">
+          <div class="overflow-x-auto">
+            <div class="w-full">
+              <div class="block max-h-[350px]">
+                <table class="w-full">
+                  <thead class="bg-gray-200 border-b sticky top-0">
+                    <tr>
+                      <th
+                        scope="col"
+                        class="text-sm font-normal text-gray-700 px-3 py-2"
+                      >
+                        Código
+                      </th>
+                      <th
+                        scope="col"
+                        class="text-sm font-normal text-gray-700  py-2"
+                      >
+                        Nome do grupo
+                      </th>
+                      <th
+                        scope="col"
+                        class="text-sm font-normal text-gray-700 w-32 py-2"
+                      >
+                        <button
+                        type="button"
+                        (click)="openDialog()"
+                        class="sm:w-32 w-full px-auto mr-4 py-1 sm:py-2 sm:h-8 h-6 bg-green-800 text-white font-medium text-[10px] md:text-[11px] leading-snug uppercase rounded shadow-md hover:bg-green-900 hover:shadow-lg focus:bg-green-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out"
+                        >
+                        Adicionar grupo
+                        </button>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="max-h-[500px] overflow-y-auto" >
+                    <tr
+                      class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
+                      *ngFor="let grupo of listGrupos ;index as i"
+                    >
+                      <td
+                        class="text-sm text-gray-900 font-light flex justify-center w-full py-4 whitespace-nowrap"
+                      >
+                      {{ grupo.codigo }}
+
+                      </td>
+                      <td
+                        class="text-sm font-medium text-gray-900 px-6 py-4 whitespace-nowrap text-center"
+                      >
+                        {{ grupo.nome }}
+                      </td>
+                      <td
+                      class="text-sm font-medium text-red-900 px-6 py-4 whitespace-nowrap text-center"
+                    >
+                      <img class="h-6 w-6 ml-5" src="./assets/icons/lixeira.svg">
+                    </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div *ngIf="listGrupos.length <= 0" class="bg-white w-full h-[52px]" >
+                  <div class="flex justify-center mt-4">
+                    <div class="flex flex-col">
+                      <img class="h-5 w-5 mx-auto" src="./assets/icons/warning.svg">
+                      <div class="text-gray-500 text-sm mt-1 text-[12px] sm:text-sm">
+                        Nenhum grupo encontrado
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

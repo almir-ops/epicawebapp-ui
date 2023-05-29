@@ -1,0 +1,9 @@
+<div class="flex bg-gray-100 h-screen p-0 m-0 bg-cover bg-no-repeat">
+  <app-side-menu></app-side-menu>
+  <div class="flex flex-col w-screen h-screen">
+      <app-navbar [titleNavBar] = "titulo"></app-navbar>
+      <div class="overflow-y-auto overflow-x-auto">
+        <router-outlet></router-outlet>
+      </div>
+  </div>
+</div>

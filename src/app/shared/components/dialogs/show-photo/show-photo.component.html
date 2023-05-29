@@ -1,0 +1,32 @@
+<div *ngIf="imgsDataLength <= 1">
+  <img class="sm:h-[500px] mx-auto" [src]="data.file" >
+
+  <div class="lens" [style.backgroundImage]="'url(' + imgUrl + ')'" [style.backgroundPositionX]="backgroundPosX" [style.backgroundPositionY]="backgroundPosY"></div>
+
+</div>
+<div *ngIf="imgsDataLength > 1">
+  <app-carousel [slides]="data.list" [animationType]="animationType" (out)='currentUrl($event)'></app-carousel>
+</div>
+<div mat-dialog-actions class="flex justify-between">
+  <div *ngIf="imgsDataLength <= 1" >
+    <button mat-button class="outline-none cursor-pointer" (click)="print()">
+      <div class="flex flex-row">
+        Imprimir
+        <img class="h-5 w-5 ml-1 mt-2" src="./assets/icons/printer.svg">
+      </div>
+    </button>
+  </div>
+  <div *ngIf="imgsDataLength > 1" class="flex flex-row">
+  <button mat-button class="outline-none cursor-pointer" (click)="printCarrousel()">
+    <div class="flex flex-row">
+      Imprimir
+      <img class="h-5 w-5 ml-1 mt-2" src="./assets/icons/printer.svg">
+    </div>
+
+  </button>
+
+  </div>
+  <button mat-button mat-dialog-close class="outline-none cursor-pointer">Fechar</button>
+<!--      <button (click)="downloadImage()" class="cursor-pointer">Download</button>
+ -->
+</div>

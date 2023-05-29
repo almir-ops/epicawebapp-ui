@@ -1,0 +1,233 @@
+<div>
+  <h1
+    class="transition-transform duration-700 ease-in-out origin-left text-gray-900 text-xl ml-4 mt-3"
+
+  >
+    Pesquisa de notas emitidas
+  </h1>
+  <h3
+  class="transition-transform duration-700 ease-in-out origin-left text-gray-800 text-xs ml-4"
+  >
+    Digite o numero da nota ou uma data para pesquisar
+  </h3>
+  <div class="flex justify-center sm:flex-none">
+    <form
+      [formGroup]="formSearchPayments"
+      class="flex flex-col justify-center w-[95%] sm:w-full"
+    >
+      <div class="flex flex-col lg:flex-row w-[100%]">
+        <div class="flex flex-row">
+          <div class="mb-1.5 mx-3 ml-3 sm:ml-4 mt-2">
+            <label class="inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+              >N° da Nota</label
+            >
+            <input
+              type="text"
+              class="
+              block
+              w-full
+              h-[25px]
+              px-3
+              py-0.5
+              text-[11px] sm:text-sm
+              font-normal
+              text-gray-700
+              bg-white bg-clip-padding
+              border
+              border-gray-500 border-opacity-50
+              rounded
+              transition
+              ease-in-out
+              m-0
+              mr-2
+              focus:outline-none
+              focus:border-gray-800
+              focus:border-opacity-75
+              "
+              placeholder="Digite o numero da nota"
+              formControlName="nfeCodigo"
+            />
+          </div>
+          <div class="xl:w-auto mx-3 md:mx-2 mt-0 sm:mt-2">
+            <label class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+              >Data Inicio</label
+            >
+            <input
+              type="date"
+              class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-gray-500 border-opacity-50 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+              placeholder="Data do falecimento"
+              formControlName="datainicio"
+            />
+          </div>
+          <div class="xl:w-auto mx-3 md:mx-3 mt-0 sm:mt-2">
+            <label class="form-label inline-block mb-1 text-gray-700 text-[11px] sm:text-sm"
+              >Data Final</label
+            >
+            <input
+              type="date"
+              class="block w-full h-[25px] px-3 py-0.5 text-[11px] sm:text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-gray-500 border-opacity-50 rounded transition ease-in-out m-0 mr-2 focus:outline-none focus:border-gray-800 focus:border-opacity-75"
+              placeholder="Data do falecimento"
+              formControlName="datafinal"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 mb-6 ml-2 flex justify-between">
+        <div class="flex justify-start">
+          <button
+            (click)="searchByParams()"
+            class="px-auto py-2 sm:w-[130px] w-24 h-[32px] bg-green-800 text-white font-medium text-[10px] md:text-[11px] leading-snug uppercase rounded shadow-md hover:bg-green-900 hover:shadow-lg focus:bg-green-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-900 active:shadow-lg transition duration-150 ease-in-out mx-2"
+          >
+            Pesquisar
+          </button>
+        </div>
+        <div class="flex justify-end mr-2 sm:mr-4" *ngIf="this.dataSource.data.length > 0">
+          <button
+            type="button"
+            (click)="clearList()"
+            class="sm:w-[130px] w-24 h-[32px] px-auto py-2 bg-white text-gray-700 font-medium text-[10px] md:text-[11px] leading-snug uppercase rounded shadow-md hover:bg-[#f1f1f1] hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out"
+          >
+            Limpar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="dataSource.data.length > 0" class="px-4 pb-2">
+    <div class="w-full h-max-[500px] example-container mat-elevation-z2 rounded-t-lg">
+      <div class="example-table-container rounded-lg">
+
+        <table mat-table [dataSource]="dataSource" class="w-full h-max-[500px] rounded-lg">
+
+          <ng-container matColumnDef="numero">
+            <th mat-header-cell *matHeaderCellDef> N° da nota </th>
+            <td mat-cell *matCellDef="let element"  class="whitespace-nowrap mx-2 pl-3">
+              <div class="pr-3 text-xs sm:text-sm">
+                {{element.num_nfe}}
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let element" class="whitespace-nowrap px-2">
+              <div class="pr-3 text-xs sm:text-sm">
+                {{element.cliente}}
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="data">
+            <div class="px-3 sm:px-0">
+              <th mat-header-cell *matHeaderCellDef> Data e Hora </th>
+            </div>
+            <td mat-cell *matCellDef="let element"  class="whitespace-nowrap px-2">
+              <div class="pr-12 text-xs sm:text-sm">
+                {{formatDateHour(element.data_emissao)}}
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="valor">
+            <th mat-header-cell *matHeaderCellDef> Valor </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="pr-12 px-1.5 text-xs sm:text-sm">
+                R$ {{element.valor_nfe.toFixed(2)}}
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Ações Column -->
+          <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef> Ações </th>
+            <td mat-cell *matCellDef="let element">
+              <div *ngIf="element.status === 'emitida'" class="cursor-pointer">
+
+                <div
+                  class="cursor-pointer flex flex-row justify-center sm:justify-start sm:-ml-8"
+                >
+                  <a
+                  href="{{element.url_nfe}}"
+                  target="_blank"
+                  class="h-6 px-2 bg-white hover:bg-primaryGreen rounded-full border border-primaryGreen text-primaryGreen hover:text-white duration-150 whitespace-nowrap">
+                    Visualizar nota
+                  </a>
+                </div>
+
+              </div>
+              <div *ngIf="element.status === 'emitindo'" class="-ml-8 flex items-center">
+                <svg class="mr-1 animate-spin" width="20px" height="20px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
+
+                  <g fill="#808080" fill-rule="evenodd" clip-rule="evenodd">
+
+                  <path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z" opacity=".2"/>
+
+                  <path d="M7.25.75A.75.75 0 018 0a8 8 0 018 8 .75.75 0 01-1.5 0A6.5 6.5 0 008 1.5a.75.75 0 01-.75-.75z"/>
+
+                  </g>
+
+                </svg>
+                {{msgNfeLoading}}
+              </div>
+              <div *ngIf="element.status === 'aberta'" class="cursor-pointer">
+                <div
+                  class="cursor-pointer flex flex-row justify-center sm:justify-start sm:-ml-5"
+                >
+                  <a
+                  (click)="currentNote(element)"
+                  class="h-6 px-2 bg-white hover:bg-primaryGreen rounded-full border border-primaryGreen text-primaryGreen hover:text-white duration-150 whitespace-nowrap">
+                    Emitir nota
+                  </a>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Status Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef > Status </th>
+            <td mat-cell *matCellDef="let element">
+              <div *ngIf="element.status === 'emitida'" class="cursor-pointer">
+                <div
+                  class="cursor-pointer flex flex-row justify-center sm:justify-start"
+                >
+                <span [ngClass]="{'inline-flex items-center bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300': element.status === 'emitida'}">
+                  <span class="w-2 h-2 mr-1 bg-green-500 rounded-full">
+                  </span>
+                  Emitida
+                </span>
+                </div>
+              </div>
+              <div *ngIf="element.status !== 'emitida'" class="cursor-pointer ">
+                <span *ngIf="element.status !== 'emitida'" [ngClass]="{'inline-flex items-center bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300': element.status !== 'emitida'}">
+                  <span class="w-2 h-2 mr-1 bg-yellow-500 rounded-full"></span>
+                  Pendente
+                </span>
+              </div>
+            </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+              (click)="selection.toggle(row)">
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="mat-elevation-z2 rounded-b-lg">
+      <mat-paginator #paginator [pageSizeOptions]="[10]" showFirstLastButtons ></mat-paginator>
+    </div>
+  </div>
+  <div *ngIf="dataSource.data.length === 0" class="px-4">
+    <div class="bg-white py-4 my-1 rounded-md shadow-md text-center text-gray-500">
+      <img class="h-8 mx-auto" src="./assets/icons/warning.svg">
+      Nenhuma nota encontrada
+    </div>
+  </div>
+  <div *ngIf="isLoading">
+    <app-loading></app-loading>
+  </div>
+</div>
